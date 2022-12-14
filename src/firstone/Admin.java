@@ -121,7 +121,7 @@ public class Admin extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         
-        if( ("1").equals(jTextField1.getText()))
+        if( ("12345678").equals(jTextField1.getText()))
         {
             this.setVisible(false);
             NewJFrame z =new NewJFrame();
