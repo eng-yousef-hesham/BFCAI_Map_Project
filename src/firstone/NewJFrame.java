@@ -7,6 +7,9 @@ package firstone;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.net.URL;
+import java.sql.*;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +23,59 @@ public class NewJFrame extends javax.swing.JFrame {
     public NewJFrame() {
         initComponents();
         this.setLocationRelativeTo(null);
+        refreshsubjecttable();
+        refreshstudenttable();
+        
+    }
+            public void refreshstudenttable()
+        {
+            try{
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bfcai", "root", "root");
+          PreparedStatement stat = con.prepareStatement("select * from student");
+          ResultSet set = stat.executeQuery();
+          DefaultTableModel dm =new DefaultTableModel();
+          dm.addColumn("student ID");
+          dm.addColumn("student name");
+          dm.addColumn("student level");
+          dm.addColumn("GPA");
+          dm.addColumn("course id");
+          
+          while (set.next()) {
+            String r[]={set.getString(1) , set.getString(2) , set.getString(3) , set.getString(4) , set.getString(5)};
+            dm.addRow(r);
+            
+        }
+          studenttable2.setModel(dm);
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(this, "error in database");
+        }
+        }
+    public void refreshsubjecttable()
+    {
+                try{
+          Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bfcai", "root", "root");
+          PreparedStatement stat = con.prepareStatement("select * from subjects");
+          ResultSet set = stat.executeQuery();
+          DefaultTableModel dm =new DefaultTableModel();
+          dm.addColumn("sub id");
+          dm.addColumn("sub name");
+          dm.addColumn("sub teacher");
+          dm.addColumn("maximum degree");
+          dm.addColumn("minimum degree");
+          
+          while (set.next()) {
+            String r[]={set.getString(1) , set.getString(2) , set.getString(3) , set.getString(4) , set.getString(5)};
+            dm.addRow(r);
+            
+        }
+          subjectstable2.setModel(dm);
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(this, "error in database");
+        }
     }
 
     /**
@@ -40,7 +96,9 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
@@ -78,6 +136,14 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
+        jPanel18 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        subjectstable2 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        jPanel19 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        studenttable2 = new javax.swing.JTable();
+        jButton9 = new javax.swing.JButton();
         jPanel30 = new javax.swing.JPanel();
         jPanel31 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -162,30 +228,48 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 204, 204));
 
+        jLabel15.setFont(new java.awt.Font("Arabic Typesetting", 0, 48)); // NOI18N
+        jLabel15.setText("\nهذا الدور خاص بالشؤون الادارية  ولا يتوفر لة اي خرائط سيتم اطلاعكم علي كل جديد عند توفره ");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1439, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 1262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(131, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 996, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(214, 214, 214)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(607, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("الدور السادس", jPanel4);
 
         jPanel5.setBackground(new java.awt.Color(255, 204, 204));
 
+        jLabel16.setFont(new java.awt.Font("Arabic Typesetting", 0, 48)); // NOI18N
+        jLabel16.setText("\nهذا الدور خاص بالشؤون الادارية  ولا يتوفر لة اي خرائط سيتم اطلاعكم علي كل جديد عند توفره ");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1439, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 1262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(131, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 996, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(214, 214, 214)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(607, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("الدور السابع", jPanel5);
@@ -500,6 +584,92 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("البحث عم الطلاب بالاسم", jPanel16);
 
+        subjectstable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane7.setViewportView(subjectstable2);
+
+        jButton2.setText("اعادة تحميل");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 865, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 326, Short.MAX_VALUE))
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 462, Short.MAX_VALUE))
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGap(144, 144, 144)
+                .addComponent(jButton2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("معلومات عن المواد", jPanel18);
+
+        studenttable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane8.setViewportView(studenttable2);
+
+        jButton9.setText("اعادة تحميل");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 865, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 392, Short.MAX_VALUE))
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 462, Short.MAX_VALUE))
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(jButton9)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("معلومات عن الطلاب", jPanel19);
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel1.setText("collage page on facebook");
 
@@ -651,6 +821,55 @@ try{
         catch(Exception E)
         {}        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+                    try{
+          Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bfcai", "root", "root");
+          PreparedStatement stat = con.prepareStatement("select * from subjects");
+          ResultSet set = stat.executeQuery();
+          DefaultTableModel dm =new DefaultTableModel();
+          dm.addColumn("sub id");
+          dm.addColumn("sub name");
+          dm.addColumn("sub teacher");
+          dm.addColumn("maximum degree");
+          dm.addColumn("minimum degree");
+          
+          while (set.next()) {
+            String r[]={set.getString(1) , set.getString(2) , set.getString(3) , set.getString(4) , set.getString(5)};
+            dm.addRow(r);
+            
+        }
+          subjectstable2.setModel(dm);
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(this, "error in database");
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+       try{Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bfcai", "root", "root");
+          PreparedStatement stat = con.prepareStatement("select * from student");
+          ResultSet set = stat.executeQuery();
+          DefaultTableModel dm =new DefaultTableModel();
+          dm.addColumn("student ID");
+          dm.addColumn("student name");
+          dm.addColumn("student level");
+          dm.addColumn("GPA");
+          dm.addColumn("course id");
+          
+          while (set.next()) {
+            String r[]={set.getString(1) , set.getString(2) , set.getString(3) , set.getString(4) , set.getString(5)};
+            dm.addRow(r);
+            
+        }
+          studenttable2.setModel(dm);
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(this, "error in database");
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton9ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -690,18 +909,22 @@ try{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -720,6 +943,8 @@ try{
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel30;
@@ -737,10 +962,14 @@ try{
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable studenttable2;
+    private javax.swing.JTable subjectstable2;
     // End of variables declaration//GEN-END:variables
 }
